@@ -3,6 +3,10 @@ import json
 import hashlib
 import pandas as pd
 from faker import Faker
+from flask import Flask
+import threading
+
+app = Flask(__name__)
 
 def titulo(texto):
     print("\n" + "=" * 70)
@@ -187,6 +191,10 @@ def main():
 
     titulo("PROCESO COMPLETADO")
 
+@app.route('/')
+def run():
+    threading.Thread(target=main).start()
+    return "✅ Anonimización ejecutada. Revisa los logs de Render."
 
 if __name__ == "__main__":
-    main()
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 10000)))
