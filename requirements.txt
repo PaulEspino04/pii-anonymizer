@@ -1,0 +1,4 @@
+pandas
+faker
+fpdf2
+boto3
